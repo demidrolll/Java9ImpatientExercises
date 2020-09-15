@@ -1,5 +1,10 @@
 package org.demidrolll.java9impatient.ch4.task2;
 
+/**
+ * Define toString, equals, and hashCode methods for the classes of the preceding
+ * exercise
+ */
+
 public class App {
     public static void main(String[] args) {
         Point a = new Point(10, 20);

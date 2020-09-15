@@ -1,2 +1,4 @@
 /Java9ImpatientExercises.iml
 *.class
+/.idea
+/target
