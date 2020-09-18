@@ -2,10 +2,15 @@ package org.demidrolll.java9impatient.ch5.task1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
+
+/**
+ * Write a method public ArrayList<Double> readValues(String filename) throws ... that
+ * reads a file containing floating-point numbers. Throw appropriate excep-
+ * tions if the file could not be opened or if some of the inputs are not
+ * floating-point numbers.
+ */
 
 public class App {
 

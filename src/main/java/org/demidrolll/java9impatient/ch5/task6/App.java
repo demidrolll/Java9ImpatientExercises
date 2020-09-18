@@ -6,6 +6,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Section 5.1.6, “The finally Clause” (page 189) has an example of a broken
+ * try statement with catch and finally clauses. Fix the code with (a) catching
+ * the exception in the finally clause, (b) a try/catch statement containing a
+ * try/finally statement, and (c) a try-with-resources statement with a catch
+ * clause.
+ */
+
 public class App {
     public static void main(String[] args) {
     }

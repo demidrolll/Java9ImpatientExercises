@@ -3,9 +3,14 @@ package org.demidrolll.java9impatient.ch5.task5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+
+/**
+ * Implement a method that contains the code with a Scanner and a PrintWriter
+ * in Section 5.1.5, “The Try-with-Resources Statement” (page 187). But don’t
+ * use the try-with-resources statement. Instead, just use catch clauses. Be
+ * sure to close both objects, provided they have been properly constructed.
+ */
 
 public class App {
     public static void main(String[] args) throws IOException {

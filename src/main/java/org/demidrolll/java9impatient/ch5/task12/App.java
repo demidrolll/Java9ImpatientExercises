@@ -2,6 +2,11 @@ package org.demidrolll.java9impatient.ch5.task12;
 
 import java.util.Objects;
 
+/**
+ * Compare the use of Objects.requireNonNull(obj) and assert obj != null. Give a
+ * compelling use for each.
+ */
+
 public class App {
     public static void main(String[] args) {
 

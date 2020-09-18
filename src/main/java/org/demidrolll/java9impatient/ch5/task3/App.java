@@ -7,6 +7,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Write a program that calls the preceding method and prints the result.
+ * Catch the exceptions and provide feedback to the user about any error
+ * conditions.
+ */
+
 public class App {
 
     public static void main(String[] args) {

@@ -1,14 +1,16 @@
 package org.demidrolll.java9impatient.ch5.task4;
 
 import javafx.util.Pair;
-import org.demidrolll.java9impatient.ch5.task1.CastException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+
+/**
+ * Repeat the preceding exercise, but don’t use exceptions. Instead, have
+ * readValues and sumOfValues return error codes of some kind.
+ */
 
 public class App {
     public static void main(String[] args) {
