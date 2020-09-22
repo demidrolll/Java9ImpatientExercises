@@ -1,5 +1,12 @@
 package org.demidrolll.java9impatient.ch6.task2;
 
+/**
+ * Reimplement the Stack<E> class, using an array to hold the elements. If
+ * necessary, grow the array in the push method. Provide two solutions, one
+ * with an E[] array and one with an Object[] array. Both solutions should
+ * compile without warnings. Which do you prefer, and why?
+ */
+
 public class App {
     public static void main(String[] args) {
         testObjectStack();
