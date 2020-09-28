@@ -25,7 +25,7 @@ public class App {
         System.out.println("start");
         List<String> filtered = words.stream()
                 .filter(w -> {
-                    System.out.println("call filter");
+                    System.out.println("call filter: " + w);
                     return w.length() > 8;
                 })
                 .limit(5)
