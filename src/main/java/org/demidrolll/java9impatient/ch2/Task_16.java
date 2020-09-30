@@ -1,7 +1,5 @@
 package org.demidrolll.java9impatient.ch2;
 
-import sun.swing.DefaultLayoutStyle;
-
 public class Task_16 {
     public static void main(String[] args) {
         Queue queue = new Queue();

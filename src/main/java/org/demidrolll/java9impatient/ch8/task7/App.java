@@ -37,6 +37,7 @@ public class App {
                 .filter(org.demidrolll.java9impatient.ch8.task6.App::isLetters)
                 .limit(100)
                 .collect(toList());
+        System.out.println(words);
     }
 
     public static void frequentWords() throws FileNotFoundException {

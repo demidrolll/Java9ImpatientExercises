@@ -1,8 +1,5 @@
 package org.demidrolll.java9impatient.ch3.task10;
 
-import com.sun.tracing.dtrace.StabilityLevel;
-import jdk.management.resource.internal.inst.ThreadRMHooks;
-
 public class App {
 
     public static void main(String[] args) {

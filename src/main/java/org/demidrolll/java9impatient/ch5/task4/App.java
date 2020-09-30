@@ -1,7 +1,5 @@
 package org.demidrolll.java9impatient.ch5.task4;
 
-import javafx.util.Pair;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        /*
         Pair<Integer, Double> result = sumOfValues("in.txt");
         switch (result.getKey()) {
             case 0:
@@ -28,8 +27,9 @@ public class App {
             default:
                 break;
         }
+        */
     }
-
+    /*
     public static Pair<Integer, ArrayList<Double>> readValues(String filename) {
         ArrayList<Double> list = new ArrayList<>();
         try (Scanner in = new Scanner(new File(filename))) {
@@ -54,4 +54,5 @@ public class App {
             return new Pair<>(result.getKey(), 0.00);
         }
     }
+     */
 }
