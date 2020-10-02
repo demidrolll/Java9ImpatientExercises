@@ -1,12 +1,16 @@
 package org.demidrolll.java9impatient.ch8.task8;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Find a realistic use for the Collectors.flatMapping method. Consider some
+ * class with a method yielding an Optional. Then group by some characteristic
+ * and, for each group, collect the nonempty optional values by using
+ * flatMapping and Optional.stream.
+ */
 public class App {
     public static void main(String[] args) {
         String[] list = new String[] {"Hello", "My", "World", "Hello"};
