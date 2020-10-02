@@ -3,6 +3,7 @@ package org.demidrolll.java9impatient.ch8.task7;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.*;
 
@@ -35,15 +36,22 @@ public class App {
     public static void firstWords() throws FileNotFoundException {
         List<String> words = tokens("alice.txt")
                 .filter(org.demidrolll.java9impatient.ch8.task6.App::isLetters)
-                .limit(100)
+                .limit(10)
                 .collect(toList());
         System.out.println(words);
     }
 
     public static void frequentWords() throws FileNotFoundException {
         Map<String, Long> words = tokens("alice.txt")
+                .filter(w -> w.length() > 5)
                 .filter(org.demidrolll.java9impatient.ch8.task6.App::isLetters)
                 .collect(groupingBy(String::toUpperCase, counting()));
-        System.out.println(words);
+
+        List<Map.Entry<String, Long>> result = words.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .limit(10)
+                .collect(toList());
+
+        System.out.println(result);
     }
 }
