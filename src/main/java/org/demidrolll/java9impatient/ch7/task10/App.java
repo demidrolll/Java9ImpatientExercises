@@ -24,11 +24,11 @@ public class App {
     }
 
     public static Map<City, Integer> findPath(Map<City, Set<Neighbor>> map, City from) {
-        Map<City, Integer> result = new HashMap<>();
+        Map<City, Integer> labels = new HashMap<>();
         Set<City> visitedCities = new HashSet<>();
         PriorityQueue<Neighbor> neighborsQueue = new PriorityQueue<>(Comparator.comparing(Neighbor::getDistance));
 
-        result.put(from, 0);
+        labels.put(from, 0);
         while (from != null) {
             neighborsQueue.clear();
             neighborsQueue.addAll(map.get(from));
@@ -44,17 +44,17 @@ public class App {
                 if (nearestCity == null) {
                     nearestCity = neighbor.getCity();
                 }
-                Integer labelDistance = result.computeIfAbsent(neighbor.getCity(), k -> -1);
-                Integer newDistance = result.get(from) + neighbor.getDistance();
+                Integer labelDistance = labels.computeIfAbsent(neighbor.getCity(), k -> -1);
+                Integer newDistance = labels.get(from) + neighbor.getDistance();
                 if (labelDistance == -1 || newDistance < labelDistance) {
-                    result.put(neighbor.getCity(), newDistance);
+                    labels.put(neighbor.getCity(), newDistance);
                 }
             }
             visitedCities.add(from);
             from = nearestCity;
         }
 
-        return result;
+        return labels;
     }
 
     public static void fillBelarusMap(Map<City, Set<Neighbor>> map) {
