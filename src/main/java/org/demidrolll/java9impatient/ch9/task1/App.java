@@ -2,10 +2,11 @@ package org.demidrolll.java9impatient.ch9.task1;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 
 /**
@@ -18,7 +19,6 @@ public class App {
         try (InputStream in = Files.newInputStream(Paths.get("alice.txt"), StandardOpenOption.READ);
              OutputStream out = Files.newOutputStream(Paths.get("alice_copy.txt"), StandardOpenOption.CREATE)) {
             // copy(in, out);
-            // copyFiles(in, out);
             // copyTemp(in, out);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -29,10 +29,11 @@ public class App {
         in.transferTo(out);
     }
 
-    public static void copyFiles(InputStream in, OutputStream out) {
-    }
-
-    public static void copyTemp(InputStream in, OutputStream out) {
+    public static void copyTemp(InputStream in, OutputStream out) throws IOException {
+        Path tmp = Files.createTempFile("", "");
+        Files.copy(in, tmp, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(tmp, out);
+        Files.deleteIfExists(tmp);
     }
 
 }
