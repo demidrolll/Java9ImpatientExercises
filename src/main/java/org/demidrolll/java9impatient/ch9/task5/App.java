@@ -2,8 +2,8 @@ package org.demidrolll.java9impatient.ch9.task5;
 
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class App {
     public static void main(String[] args) {
-        Set<String> replacements = Charset.availableCharsets().values().stream()
+        Map<String, Integer> replacements = Charset.availableCharsets().values().stream()
                 .map(charset -> {
                     CharsetEncoder encoder;
                     try {
@@ -30,7 +30,7 @@ public class App {
                     return null;
                 })
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toMap(String::toString, s -> 1, Integer::sum));
 
         System.out.println(replacements);
     }
