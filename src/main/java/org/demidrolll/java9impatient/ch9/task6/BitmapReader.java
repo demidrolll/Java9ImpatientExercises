@@ -25,6 +25,8 @@ public class BitmapReader implements AutoCloseable {
 
     private void readData() throws IOException {
         channel = channel.position(0);
+        BitmapFileHeader header = new BitmapFileHeader();
+        header.read(channel);
     }
 
     @Override
