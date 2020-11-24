@@ -2,6 +2,8 @@ package org.demidrolll.java9impatient.ch9.task6;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.CharBuffer;
 import java.nio.channels.ByteChannel;
 
 /**
@@ -9,7 +11,7 @@ import java.nio.channels.ByteChannel;
  */
 public class BitmapFileHeader {
 
-    private static int TOTAL_DATA_SIZE = (3 * Short.SIZE + 2 * Integer.SIZE) / 8;
+    public static final int TOTAL_DATA_SIZE = 3 * Short.BYTES + 2 * Integer.BYTES;
 
     private short signature;
     private int size;
@@ -18,7 +20,7 @@ public class BitmapFileHeader {
     private int bitsOffset;
 
     public void read(ByteChannel channel) throws IOException {
-        ByteBuffer buffer = ByteBuffer.allocate(TOTAL_DATA_SIZE);
+        ByteBuffer buffer = ByteBuffer.allocate(TOTAL_DATA_SIZE).order(ByteOrder.LITTLE_ENDIAN);
         channel.read(buffer);
         buffer.position(0);
         signature = buffer.getShort();
@@ -26,5 +28,25 @@ public class BitmapFileHeader {
         reserved1 = buffer.getShort();
         reserved2 = buffer.getShort();
         bitsOffset = buffer.getInt();
+    }
+
+    public short getSignature() {
+        return signature;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public short getReserved1() {
+        return reserved1;
+    }
+
+    public short getReserved2() {
+        return reserved2;
+    }
+
+    public int getBitsOffset() {
+        return bitsOffset;
     }
 }
