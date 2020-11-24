@@ -23,6 +23,16 @@ public class BitmapCoreHeader implements BitmapInfo {
     }
 
     @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
     public void read(ByteChannel channel) throws IOException {
         ByteBuffer buffer = ByteBuffer.allocate(TOTAL_DATA_SIZE).order(ByteOrder.LITTLE_ENDIAN);
         channel.read(buffer);

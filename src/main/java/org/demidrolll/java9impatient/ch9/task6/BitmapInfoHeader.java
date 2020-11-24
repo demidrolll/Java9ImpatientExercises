@@ -26,10 +26,20 @@ public class BitmapInfoHeader implements BitmapInfo {
     @Override
     public int getImageDataSize() {
         if (imageSize == 0) {
-            return (width * 3 + width % 4) * height;
+            return width * height * (bitCount / 8);
         } else {
             return imageSize;
         }
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     @Override

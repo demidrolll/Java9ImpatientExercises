@@ -8,6 +8,8 @@ import java.nio.channels.ByteChannel;
  */
 public interface BitmapInfo {
     int getImageDataSize();
+    int getWidth();
+    int getHeight();
     void read(ByteChannel channel) throws IOException;
 
     static BitmapInfo createByInfoSize(int infoHeaderSize) {

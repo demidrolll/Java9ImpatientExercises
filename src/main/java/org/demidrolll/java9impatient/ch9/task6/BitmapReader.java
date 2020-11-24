@@ -3,9 +3,13 @@ package org.demidrolll.java9impatient.ch9.task6;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.stream.Stream;
 
 /**
  *
@@ -36,6 +40,20 @@ public class BitmapReader implements AutoCloseable {
 
         ByteBuffer dataBuffer = ByteBuffer.allocate(info.getImageDataSize()).order(ByteOrder.LITTLE_ENDIAN);
         channel.position(header.getBitsOffset()).read(dataBuffer);
+        IntBuffer data = dataBuffer.position(0).asIntBuffer();
+        for (int row = 0; row < info.getHeight(); row++) {
+            int startColumn = info.getWidth() * row;
+            int stopColumn = startColumn + info.getWidth();
+            for (int column = 0; column < info.getWidth() / 2; column++) {
+                int lastIndex = stopColumn - column - 1;
+                int startIndex = startColumn + column;
+                int first = data.get(startIndex);
+                int last = data.get(lastIndex);
+                data.put(startIndex, last);
+                data.put(lastIndex, first);
+            }
+        }
+        channel.position(header.getBitsOffset()).write(dataBuffer);
     }
 
     @Override
