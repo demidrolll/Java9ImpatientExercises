@@ -8,6 +8,7 @@ import java.nio.ShortBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.stream.Stream;
 
@@ -23,7 +24,7 @@ public class BitmapReader implements AutoCloseable {
 
     public static BitmapReader open(String filename) throws IOException {
         BitmapReader reader = new BitmapReader();
-        reader.channel = Files.newByteChannel(Paths.get(filename));
+        reader.channel = Files.newByteChannel(Paths.get(filename), StandardOpenOption.READ, StandardOpenOption.WRITE);
         reader.readData();
         return reader;
     }
