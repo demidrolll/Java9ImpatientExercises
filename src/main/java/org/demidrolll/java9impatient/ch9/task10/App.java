@@ -35,7 +35,7 @@ public class App {
 
     // todo valid parse sign of digit
     public static List<Integer> extractB(String digits) {
-        return Arrays.stream(digits.split("[+\\- ]"))
+        return Arrays.stream(digits.split("[+\\- ]+"))
                 .filter(s -> s.trim().length() > 0)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
