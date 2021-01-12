@@ -16,6 +16,9 @@ import java.util.Arrays;
 public class App {
 
     private static class Point implements Serializable {
+
+        private static final long serialVersionUID = 1L;
+
         private final double x;
         private final double y;
 
