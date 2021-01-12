@@ -1,7 +1,6 @@
 package org.demidrolll.java9impatient.ch9.task15;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -21,12 +20,12 @@ public class App {
 
     private static class Point implements Serializable {
 
-        private static final long serialVersionUID = 2L;
+        private static final long serialVersionUID = 1L;
 
         private double x;
         private double y;
 
-        private final double[] coordinates = new double[2];
+        private transient final double[] coordinates = new double[2];
 
         public Point(double x, double y) {
             coordinates[0] = x;
@@ -40,18 +39,9 @@ public class App {
                     ", y=" + coordinates[1] +
                     '}';
         }
-    }
 
-    private static class ExtendReadObject extends ObjectInputStream {
-
-        public ExtendReadObject(InputStream in) throws IOException {
-            super();
-        }
-
-        @Override
-        protected Object readObjectOverride() throws IOException, ClassNotFoundException {
-            GetField fields = readFields();
-            return null;
+        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+            in.defaultReadObject();
         }
     }
 
@@ -67,7 +57,7 @@ public class App {
         System.out.println(Arrays.toString(points));
 
         Point[] restoredPoints = null;
-        try (ObjectInputStream in = new ExtendReadObject(Files.newInputStream(Paths.get("points.dat")))) {
+        try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(Paths.get("points.dat")))) {
             restoredPoints = (Point[]) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
