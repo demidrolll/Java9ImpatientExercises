@@ -6,9 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -22,34 +21,30 @@ public class App {
     public static void main(String[] args) {
 
         String word = "metadata_access_type";
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
 
         try {
             List<Runnable> tasks = Files
                     .walk(Paths.get("c:\\wildfly\\wildfly-18.0.1.Final\\standalone\\log\\"))
                     .filter(Files::isRegularFile)
-                    .map(path -> App.searchWord(path, word))
+                    .map(path -> App.searchWord(path, word, executor))
                     .collect(Collectors.toList());
 
             for (Runnable task : tasks) {
-                executor.schedule(task, 1, TimeUnit.SECONDS);
-                if (executor.isTerminated()) {
-                    break;
-                }
+                executor.submit(task);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         System.out.println("stop program");
-        executor.shutdown();
     }
 
-    private static Runnable searchWord(Path path, String word) {
+    private static Runnable searchWord(Path path, String word, ExecutorService executor) {
         return () -> {
             System.out.println("start read file " + path);
             if (Thread.currentThread().isInterrupted()) {
-                System.out.println("Thread for file " + path + " is interrupted");
+                System.out.println("Interrupted thread for file " + path);
                 return;
             }
             try {
@@ -58,8 +53,8 @@ public class App {
                         .flatMap(line -> Arrays.stream(line.split("[\\s\\t\\n\\r\\f]")))
                         .anyMatch(word::equalsIgnoreCase);
                 if (existWord) {
-                    System.out.println("Word was found");
-                    Thread.currentThread().interrupt();
+                    System.out.println("Word was found in " + path);
+                    executor.shutdownNow();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
